@@ -13,6 +13,16 @@
 					localStorage.visitId = window.OracleUnifiedVisit.visitId();
 				}
 			};
+			
+			function clearAll() {
+				window.localStorage.clear();
+			}
+			
+			function getLocalStorageItem() {
+			  var textValue = $('#input-value').text();
+				localStorage.getItem(textValue);
+			}
+			
 		</script>
 		<script type='text/javascript' src="https://cloud-commerce-visit.oracleoutsourcing.com/Visit/js/oracleunifiedvisit.js"></script>
     <script type="text/javascript">
@@ -27,8 +37,12 @@
   </head>
 
   <body>
-    <h1>Beacon Redirect</h1>
-    <p>You have been taken to this page from the Chrome Physical Web App</p>
-    <p id="visitor-id-panel"></p>
+    <h1>Get Local Storage item</h1>
+		<input id="input-value" type="text" value='visitorId'></input>
+    <p><button type="button" value="Get Item" onclick="getLocalStorageItem()"></button></p>
+		
+		<h1>Clear Local Storage</h1>
+    <p><button type="button" value="Clear Local Storage" onclick="clearAll()"></button></p>
+		
   <body>
 </html>
