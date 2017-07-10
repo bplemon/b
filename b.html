@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Beacon Redirect</title>
+    <script src="jquery.js"></script>
+    <script>
+      $(document).ready(function(){
+        var outputString = 'N/A';
+
+        if(localStorage && localStorage.visitorId) {
+          outputString = localStorage.visitorId;
+        }
+
+        $('#visitor-id-panel').text(outputString);
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>Beacon Redirect</h1>
+    <p>You have been taken to this page from the Chrome Physical Web App</p>
+    <p id="visitor-id-panel"></p>
+  <body>
+</html>
