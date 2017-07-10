@@ -4,13 +4,16 @@
     <script src="jquery.js"></script>
     <script>
       $(document).ready(function(){
-        var outputString = 'N/A';
+        var outputString = 'Your visitorId is ';
 
         if(localStorage && localStorage.visitorId) {
-          outputString = localStorage.visitorId;
+          outputString += localStorage.visitorId;
+        } else {
+          outputString += 'N/A';
         }
 
-        $('#visitor-id-panel').text(outputString);
+        $('#visitor-id-panel').text(outputString);     
+        
       });
     </script>
   </head>
