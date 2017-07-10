@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Beacon Redirect</title>
+    <title>Beacon Set Cookie</title>
     <script type="text/javascript">
 			window.OracleUnifiedVisit =
 			{
@@ -16,11 +16,15 @@
 			
 			function clearAll() {
 				window.localStorage.clear();
+				$('.alert').text('Local Storage cleared');
+				$('.alert').show();
 			}
 			
 			function getLocalStorageItem() {
-			  var textValue = $('#input-value').text();
-				localStorage.getItem(textValue);
+			  var textValue = $('#input-value').val(),
+				    localStorageVal = localStorage.getItem(textValue);
+						
+				$('#visitor-id-panel').text('The visitorId stored in local storage is ' + localStorageVal);     
 			}
 			
 		</script>
@@ -33,16 +37,30 @@
     </script>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
     <script type="text/javascript" src="https://ccexperimentsstatic.oracleoutsourcing.com/js/atgsvcs.js"></script>
-		
+		<style>
+			.alert {
+				color: #a94442;
+				background-color: #f2dede;
+				border-color: #ebccd1;
+				padding: 15px;
+				margin-bottom: 20px;
+				border: 1px solid transparent;
+				border-radius: 4px;
+				display: none;
+			}
+		<style>
   </head>
 
   <body>
+		<p class="alert"></p>
+		
     <h1>Get Local Storage item</h1>
 		<input id="input-value" type="text" value='visitorId'></input>
-    <p><button type="button" value="Get Item" onclick="getLocalStorageItem()"></button></p>
+    <p><button type="button" onclick="getLocalStorageItem()">Get Item</button></p>
 		
 		<h1>Clear Local Storage</h1>
-    <p><button type="button" value="Clear Local Storage" onclick="clearAll()"></button></p>
+    <p><button type="button" onclick="clearAll()">Clear Local Storage</button></p>
 		
+		<p id="visitor-id-value"></p>
   <body>
 </html>
