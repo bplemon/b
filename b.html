@@ -11,6 +11,18 @@
         }
 
         $('#visitor-id-panel').text(outputString);
+        
+        var count = 10;
+        var countdown = setInterval(function(){
+          $("p.countdown").html(count + " seconds remaining until redirect");
+          if (count == 0) {
+            clearInterval(countdown);
+            window.location('https://llg00grn.uk.oracle.com/QA/exp/testpages/beacon.html', "_self");
+
+          }
+          count--;
+        }, 1000);       
+        
       });
     </script>
   </head>
@@ -18,6 +30,6 @@
   <body>
     <h1>Beacon Redirect</h1>
     <p>You have been taken to this page from the Chrome Physical Web App</p>
-    <p id="visitor-id-panel"></p>
+    <p class="countdown"></p>
   <body>
 </html>
