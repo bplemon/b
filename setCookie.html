@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Beacon Redirect</title>
+    <script type="text/javascript">
+			window.OracleUnifiedVisit =
+			{
+				accountId: '0000000000001',
+				host: 'https://cloud-commerce-visit.oracleoutsourcing.com/',
+				handle: function()
+				{
+					window.ATGSvcs && ATGSvcs.visitIDsLoaded();
+					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
+					localStorage.visitId = window.OracleUnifiedVisit.visitId();
+				}
+			};
+		</script>
+		<script type='text/javascript' src="https://cloud-commerce-visit.oracleoutsourcing.com/Visit/js/oracleunifiedvisit.js"></script>
+    <script type="text/javascript">
+    //  if (!/https/i.test(location.protocol)) {
+    //    location.href = location.href.replace(/http:/, 'https:');
+    //  }
+    //  var ATGSvcs = { expid: '0662B84F16654B6AE050F90ABAA02F89', CFG:{'-exp-static-host': 'ccexperimentsstatic.oracleoutsourcing.com/EEAdmin/js/ee/', '-static-host': 'ccexperimentsstatic.oracleoutsourcing.com/EEAdmin/js/ee/', '-exp-host': 'ccexperimentsstatic.oracleoutsourcing.com' } }; 
+    </script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="https://ccexperimentsstatic.oracleoutsourcing.com/js/atgsvcs.js"></script>
+		
+  </head>
+
+  <body>
+    <h1>Beacon Redirect</h1>
+    <p>You have been taken to this page from the Chrome Physical Web App</p>
+    <p id="visitor-id-panel"></p>
+  <body>
+</html>
