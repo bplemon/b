@@ -4,24 +4,15 @@
     <script src="jquery.js"></script>
     <script>
       $(document).ready(function(){
-        var outputString = 'N/A';
+        var outputString = 'Your visitorId is ';
 
         if(localStorage && localStorage.visitorId) {
-          outputString = localStorage.visitorId;
+          outputString += localStorage.visitorId;
+        } else {
+          outputString += 'N/A';
         }
 
-        $('#visitor-id-panel').text(outputString);
-        
-        var count = 10;
-        var countdown = setInterval(function(){
-          $("p.countdown").html(count + " seconds remaining until redirect");
-          if (count == 0) {
-            clearInterval(countdown);
-            window.open('https://llg00grn.uk.oracle.com/QA/exp/testpages/beacon.html', "_self");
-
-          }
-          count--;
-        }, 1000);       
+        $('#visitor-id-panel').text(outputString);     
         
       });
     </script>
@@ -30,6 +21,6 @@
   <body>
     <h1>Beacon Redirect</h1>
     <p>You have been taken to this page from the Chrome Physical Web App</p>
-    <p class="countdown"></p>
+    <p id="visitor-id-panel"></p>
   <body>
 </html>
