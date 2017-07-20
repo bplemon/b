@@ -11,7 +11,7 @@
 				  visitorIdKey = localStorage.visitorId;
 					searchHistory = localStorage.getItem(visitorIdKey);
 			    $('#visitor-id').text(visitorIdKey);
-				  $('#visitor-search').text(searchHistory);
+				  $('#visitor-search').text(searchHistory == null ? 'N/A' : searchHistory);
 				}
 				
       });

@@ -48,6 +48,10 @@
 				  localStorage.removeItem(visitorIdKey);
 				}
 			}
+			
+			function clearLocalStorage() {
+			  localStorage.clear();
+			}
 		</script>
   </head>
 
@@ -64,6 +68,7 @@
   
 		<hr />
 		<p><button type="button" onclick="clearLocalStorageSearchItem()">Clear Search History</button></p>
+		<p><button type="button" onclick="clearLocalStorage()">Clear Local Storage</button></p>
 
   <body>
 </html>
