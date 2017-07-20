@@ -5,16 +5,15 @@
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>		
 		<script>
       $(document).ready(function(){
-        var outputString = '', localStorageSearchHistory = 'N/A';
-        if(localStorage && localStorage.visitorId) {
-            outputString += localStorage.visitorId;
-						localStorageSearchHistory = localStorage.getItem(visitorIdKey);
-				}	else {
-          outputString += 'not yet set';
-        }
+        var visitorIdKey, searchHistory = 'N/A';
 				
-        $('#visitor-id').text(outputString);
-				$('#visitor-search').text(outputString);
+        if(localStorage && localStorage.visitorId) {
+				    visitorIdKey = localStorage.visitorId;
+						searchHistory = localStorage.getItem(visitorIdKey);
+				}
+				
+        $('#visitor-id').text(visitorIdKey);
+				$('#visitor-search').text(searchHistory);
 				
       });
     </script>
@@ -31,8 +30,8 @@
 		</div>
 
     <p>You have been taken to this page by clicking a Physical Web link.</p>
-    <p>Your visitorId is: <span id="visitor-id" class="strong"></span></p>
-		<p>You have previously searched for: <span id="visitor-search" class="strong"></span></p>
+    <p>Your visitorId is: <span id="visitor-id" class="strong">N/A</span></p>
+		<p>You have previously searched for: <span id="visitor-search" class="strong">N/A</span></p>
 
   <body>
 </html>
