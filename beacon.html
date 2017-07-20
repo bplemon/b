@@ -8,12 +8,11 @@
         var visitorIdKey, searchHistory = 'N/A';
 				
         if(localStorage && localStorage.visitorId) {
-				    visitorIdKey = localStorage.visitorId;
-						searchHistory = localStorage.getItem(visitorIdKey);
+				  visitorIdKey = localStorage.visitorId;
+					searchHistory = localStorage.getItem(visitorIdKey);
+			    $('#visitor-id').text(visitorIdKey);
+				  $('#visitor-search').text(searchHistory);
 				}
-				
-        $('#visitor-id').text(visitorIdKey);
-				$('#visitor-search').text(searchHistory);
 				
       });
     </script>
