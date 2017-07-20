@@ -2,59 +2,59 @@
   <head>
     <title>Beacon Set Cookie</title>
     <script type="text/javascript">
-			window.OracleUnifiedVisit =
-			{
-				accountId: '0000000000001',
-				host: 'https://cloud-commerce-visit.oracleoutsourcing.com',
-				handle: function()
-				{
-					window.ATGSvcs && ATGSvcs.visitIDsLoaded();
-					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
-					localStorage.visitId = window.OracleUnifiedVisit.visitId();
-				}
-			};
+      window.OracleUnifiedVisit = {
+        accountId: '0000000000001',
+	host: 'https://cloud-commerce-visit.oracleoutsourcing.com',
+	handle: function() {
+	  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
+	  localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
+	  localStorage.visitId = window.OracleUnifiedVisit.visitId();
+	}
+      };
 			
-			function clearAll() {
-				window.localStorage.clear();
-				$('.alert').text('Local Storage cleared');
-				$('.alert').show();
-			}
+      function clearAll() {
+       window.localStorage.clear();
+         $('.alert').text('Local Storage cleared');
+       	 $('.alert').show();
+       	 $('#visitor-id-panel').html('<p></p>')
+      }
 			
-			function getLocalStorageItem() {
-			  var textValue = $('#input-value').val(),
-				    localStorageVal = localStorage.getItem(textValue);
-						
-				$('#visitor-id-panel').text('The visitorId stored in local storage is ' + localStorageVal);     
-			}
-			
-		</script>
-		<script type='text/javascript' src="https://cloud-commerce-visit.oracleoutsourcing.com/Visit/js/oracleunifiedvisit.js"></script>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
+      function getLocalStorageItem() {
+	 var textValue = $('#input-value').val(),
+	     localStorageVal = localStorage.getItem(textValue);
+					
+        $('#visitor-id-panel').html('<p>The visitorId stored in local storage is <span class="strong">' + localStorageVal + '</span></p>');     
+      }			
+    </script>
+    <script type='text/javascript' src="https://cloud-commerce-visit.oracleoutsourcing.com/Visit/js/oracleunifiedvisit.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
     <script type="text/javascript" src="https://ccexperimentsstatic.oracleoutsourcing.com/js/atgsvcs.js"></script>
-		<style>
-			.alert {
-				color: #a94442;
-				background-color: #f2dede;
-				border-color: #ebccd1;
-				padding: 15px;
-				margin-bottom: 20px;
-				border: 1px solid transparent;
-				border-radius: 4px;
-				display: none;
-			}
-		</style>
+    <style>
+      .alert {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        display: none;
+      }
+      h1 { background-color: navy; color: white; padding: 5px; }
+      .strong { font-weight: bold; }
+    </style>
   </head>
 
   <body>
-		<p class="alert"></p>
-		
+    <p class="alert"></p>	
+	  
     <h1>Get Local Storage item</h1>
-		<input id="input-value" type="text" value='visitorId'></input>
+    <input id="input-value" type="text" value='visitorId'></input>
     <p><button type="button" onclick="getLocalStorageItem()">Get Item</button></p>
 		
-		<h1>Clear Local Storage</h1>
+    <h1>Clear Local Storage</h1>
     <p><button type="button" onclick="clearAll()">Clear Local Storage</button></p>
 		
-		<p id="visitor-id-panel"></p>
+    <div id="visitor-id-panel"></div>
   <body>
 </html>
