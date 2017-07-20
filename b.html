@@ -1,26 +1,29 @@
 <html>
   <head>
-    <title>Beacon Redirect</title>
+    <title>Cloud Commerce Beacon</title>
     <script src="jquery.js"></script>
     <script>
       $(document).ready(function(){
-        var outputString = 'Your visitorId is ';
+        var outputString = '';
 
         if(localStorage && localStorage.visitorId) {
           outputString += localStorage.visitorId;
         } else {
-          outputString += 'N/A';
+          outputString += 'not yet set';
         }
 
         $('#visitor-id-panel').text(outputString);     
-        
       });
     </script>
+    <style>
+      h1 { background-color: navy; color: white; padding: 5px; }
+      .strong { font-weight: bold; }
+    </style>
   </head>
 
   <body>
-    <h1>Beacon Redirect</h1>
-    <p>You have been taken to this page from the Chrome Physical Web App</p>
-    <p id="visitor-id-panel"></p>
+    <h1>Cloud Commerce Beacon</h1>
+    <p>You have been taken to this page by clicking a Physical Web link</p>
+    <p>Your visitorId is: <span id="visitor-id-panel" class="strong"></span></p>
   <body>
 </html>
