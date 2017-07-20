@@ -38,9 +38,11 @@
 					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
 					localStorage.visitId = window.OracleUnifiedVisit.visitId();
 					visitorIdKey = localStorage.visitorId
-					setVisitorIdText(visitorIdKey);
+				} else {
+				  visitorIdKey = localStorage.visitorId
 				}
-				
+				setVisitorIdText(visitorIdKey);
+									
 				return visitorIdKey;
 			}
 	
