@@ -72,7 +72,7 @@
 			}
 			
 			$(document).ready(function(){
-				var visitorIdKey = localStorage.visitorId;
+				var visitorIdKey = localStorage.visitorId, searchHistory;
 
 				if(visitorIdKey == null) {
 				  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
@@ -81,14 +81,15 @@
 					visitorIdKey = localStorage.visitorId;
 				}
 				
-			  var searchHistory = getSearchHistory('searchHistory_' + visitorIdKey), items;
+				setVisitorIdText(visitorIdKey);
+								
+			  searchHistory = getSearchHistory('searchHistory_' + visitorIdKey, items);
 				
 				items = searchHistory.split(",");
 				items.forEach(function(item){
 					$('ul.search-history').append('<li>' + item + '</li>');		
 				});
 				
-				setVisitorIdText(visitorIdKey);
       });
 		</script>
   </head>
