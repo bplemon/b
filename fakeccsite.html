@@ -72,7 +72,7 @@
 			}
 			
 			$(document).ready(function(){
-				var visitorIdKey = localStorage.visitorId, searchHistory;
+				var visitorIdKey = localStorage.visitorId, searchHistory, searchHistoryItems;
 
 				if(visitorIdKey == null) {
 				  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
@@ -83,10 +83,10 @@
 				
 				setVisitorIdText(visitorIdKey);
 								
-			  searchHistory = getSearchHistory('searchHistory_' + visitorIdKey, items);
+			  searchHistory = getSearchHistory('searchHistory_' + visitorIdKey);
 				
-				items = searchHistory.split(",");
-				items.forEach(function(item){
+				searchHistoryItems = searchHistory.split(",");
+				searchHistoryItems.forEach(function(item){
 					$('ul.search-history').append('<li>' + item + '</li>');		
 				});
 				
