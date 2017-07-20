@@ -81,7 +81,7 @@
 					visitorIdKey = localStorage.visitorId;
 				}
 				
-			  var searchHistory = getSearchHistory(visitorIdKey), items;
+			  var searchHistory = getSearchHistory('searchHistory_' + visitorIdKey), items;
 				
 				items = searchHistory.split(",");
 				items.forEach(function(item){
