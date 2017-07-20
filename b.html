@@ -1,17 +1,90 @@
 <html>
   <head>
+    <title>Tap For Rewards!</title>
+		<link href="style.css" rel="stylesheet" />
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>		
+		<script>
+      $(document).ready(function(){
+        var visitorIdKey, searchHistory = 'N/A', searchHistoryItems = '',
+				    cartContents = 'N/A', cartContentsItems = '';
+				
+        if(localStorage && localStorage.visitorId) {
+				  visitorIdKey = localStorage.visitorId;
+					searchHistory = localStorage.getItem('searchHistory_' + visitorIdKey);					
+					
+					if(searchHistory != null && searchHistory != '') {
+						searchHistoryItems = searchHistory.split(",");
+						searchHistoryItems.forEach(function(item){
+							$('ul.search-history').append('<li>' + item + '</li>');		
+						});
+						$('.historyPanel').show();
+					} else {
+						$('.historyPanel').hide();
+					}
+					
+					cartContents = localStorage.getItem('cartContents_' + visitorIdKey);					
+					
+					if(cartContents != null && cartContents != '') {
+						cartContentsItems = cartContents.split(",");
+						cartContentsItems.forEach(function(item){
+							$('ul.cart-contents').append('<li>' + item + '</li>');		
+						});
+						$('.cartContentsPanel').show();
+					} else {
+						$('.cartContentsPanel').hide();
+					}
+					
+					$('#visitor-id').text(visitorIdKey);
+				} else {
+					$('.historyPanel').hide();
+					$('.cartContentsPanel').hide();
+				}
+				
+      });
+    </script>
+		
+		
+  </head>
+
+  <body>
+	  <div class="header">
+			<a class="brand">
+				<img src="oracle_logo.svg">
+				<span>Fake Commerce Cloud Site</span>
+			</a>
+		</div>
+
+    <p>You have been taken to this page by clicking a Physical Web link.</p>
+    <p>Your visitorId is: <span id="visitor-id" class="strong">N/A</span></p>
+		<hr />
+		<div style="float: left; width: 100%;">
+			<div class="historyPanel" style="float: left; width: 50%;">
+				<h4>Your previous search history:</h4>
+				<p><ul class="search-history"></ul></p>
+			</div>
+			
+			<div class="cartContentsPanel" style="float: left; width: 50%;">
+				<h4>Your cart contents:</h4>
+				<p><ul class="cart-contents"></ul></p>
+			</div>
+
+		</div>
+  <body>
+</html>
+
+
+<html>
+  <head>
     <title>Cloud Commerce Beacon</title>
     <script src="jquery.js"></script>
     <script>
       $(document).ready(function(){
         var outputString = '';
-
         if(localStorage && localStorage.visitorId) {
           outputString += localStorage.visitorId;
         } else {
           outputString += 'not yet set';
         }
-
         $('#visitor-id-panel').text(outputString);     
       });
     </script>
@@ -22,8 +95,6 @@
   </head>
 
   <body>
-    <h1>Cloud Commerce Beacon</h1>
-    <p>You have been taken to this page by clicking a Physical Web link.</p>
-    <p>Your visitorId is: <span id="visitor-id-panel" class="strong"></span></p>
+
   <body>
 </html>
