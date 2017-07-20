@@ -80,7 +80,7 @@
 			function clearLsVisitorId() {
 			  localStorage.clear();
 				setVisitorIdText('not set');
-				setSearchHistoryTitle('No search history');	
+				setSearchHistoryTitle(false);	
 			}
 			
 			$(document).ready(function(){
@@ -133,8 +133,26 @@
 		  </p>
 		</div>
 		
-		<div class="tiles">
+		<hr />
 		
+		<div class="product-panel">
+			<table border="0" style="text-align: center; width: 50%; margin: auto;">
+				<tr>
+					<td><img src="sw4.jpg" height="30%" width="30%" /></td>
+					<td><img src="sw6.jpg" height="30%" width="30%" /></td>
+					<td><img src="lotr.jpg" height="30%" width="30%" /></td>
+				</tr>
+				<tr>
+					<td>Star Wars Episode 4</td>
+					<td>Star Wars Episode 6</td>
+					<td>Lord Of the Rings</td>
+				</tr>
+				<tr>
+					<td><button>Add to Cart</button></td>
+					<td><button>Add to Cart</button></td>
+					<td><button>Add to Cart</button></td>
+				</tr>
+			</table>
 		</div>
 		
 		<hr />
