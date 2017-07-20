@@ -25,6 +25,24 @@
 			function getSearchHistory(visitorIdKey) {
 			  return localStorage.getItem('searchHistory_' + visitorIdKey);
 			}
+			
+			function getCartContents(visitorIdKey) {
+			  return localStorage.getItem('cartContents_' + visitorIdKey);
+			}
+	
+			function getVisitorIdKey() {
+			  var visitorIdKey;
+				
+				if(localStorage.visitorId == 'undefined' || localStorage.visitorId == null) {
+				  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
+					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
+					localStorage.visitId = window.OracleUnifiedVisit.visitId();
+					visitorIdKey = localStorage.visitorId
+					setVisitorIdText(visitorIdKey);
+				}
+				
+				return visitorIdKey;
+			}
 	
 			function setVisitorIdText(text) {
 				$('#visitor-id').text(text);
@@ -37,20 +55,37 @@
 		    $('#search-history-title').text(isHistory ? hasHistoryTitle : noHistoryTitle);
 			}
 			
+			function setCartContentsTitle(hasContents) {
+				var hasContentsTitle = 'Your cart contains',
+					  noContentsTitle = 'Your cart is empty';
+						
+		    $('#cart-contents-title').text(hasContents ? hasContentsTitle : noContentsTitle);
+			}
+			
+			function addToCart(item) {
+				var visitorIdKey = getVisitorIdKey(), lsCartContents;
+				
+				lsCartContents = localStorage.getItem('cartContents_' + visitorIdKey);
+				
+				if(lsCartContents == null || lsCartContents == '') {
+					lsCartContents = item;
+				} else {
+					lsCartContents = lsCartContents + ',' + item;
+				}
+				
+				localStorage.setItem('cartContents_' + visitorIdKey, lsCartContents);	
+				
+				$('ul.cart-contents').append('<li>' + item + '</li>');
+				
+				setCartContentsTitle(true);
+			}
+			
 		  function addSearchItem() {
-				var visitorIdKey = localStorage.visitorId, searchValue = $('#search-value').val();
+				var visitorIdKey = getVisitorIdKey(), lsSerchHistory, searchValue = $('#search-value').val();
 
 				if(searchValue == '')
 					return;
 				
-				if(visitorIdKey == null) {
-				  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
-					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
-					localStorage.visitId = window.OracleUnifiedVisit.visitId();
-					visitorIdKey = localStorage.visitorId
-					setVisitorIdText(visitorIdKey);
-				}
-
 				lsSerchHistory = localStorage.getItem('searchHistory_' + visitorIdKey);
 				
 				if(lsSerchHistory == null || lsSerchHistory == '') {
@@ -80,20 +115,23 @@
 			function clearLsVisitorId() {
 			  localStorage.clear();
 				setVisitorIdText('not set');
-				setSearchHistoryTitle(false);	
+				setSearchHistoryTitle(false);
+				setCartContentsTitle(false);
+			}
+			
+			function clearLSCartContents() {
+			  var visitorIdKey = localStorage.visitorId;
+				if(visitorIdKey != null) {
+				  localStorage.removeItem('cartContents_' + visitorIdKey);
+				}
+				setCartContentsTitle(false);
+				$('ul.cart-contents').empty();;
 			}
 			
 			$(document).ready(function(){
-				var visitorIdKey = localStorage.visitorId, searchHistory, searchHistoryItems, searchHistoryTitle;
-
-				if(visitorIdKey == null) {
-				  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
-					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
-					localStorage.visitId = window.OracleUnifiedVisit.visitId();
-					visitorIdKey = localStorage.visitorId;
-				}
-				
-				setVisitorIdText(visitorIdKey);
+				var visitorIdKey = getVisitorIdKey(),
+				    searchHistory, searchHistoryItems,
+						cartContents, cartContentsItems;
 								
 			  searchHistory = getSearchHistory(visitorIdKey);
 				
@@ -106,8 +144,21 @@
 				} else {
 					isSearchHistory = false;
 				}
+				
+				cartContents = getCartContents(visitorIdKey);
+				
+				if(cartContents != null && cartContents != '') {
+					cartContentsItems = cartContents.split(",");
+					cartContentsItems.forEach(function(item){
+						$('ul.cart-contents').append('<li>' + item + '</li>');		
+					});
+					isCartContents = true;
+				} else {
+					isCartContents = false;
+				}
 
 				setSearchHistoryTitle(isSearchHistory);	
+				setCartContentsTitle(isCartContents);
       });
 		</script>
   </head>
@@ -148,24 +199,34 @@
 					<td>Lord Of the Rings</td>
 				</tr>
 				<tr>
-					<td><button>Add to Cart</button></td>
-					<td><button>Add to Cart</button></td>
-					<td><button>Add to Cart</button></td>
+					<td><button onclick="addToCart('Star Wars Episode 4')">Add to Cart</button></td>
+					<td><button onclick="addToCart('Star Wars Episode 6')">Add to Cart</button></td>
+					<td><button onclick="addToCart('Lord of the Rings')">Add to Cart</button></td>
 				</tr>
 			</table>
 		</div>
 		
 		<hr />
-		<div class="search-history">
-		  <h4 id="search-history-title"></h4>
-		  <ul class="search-history"></ul>
-		  <br />
-		  <hr />
+		<div style="float: left; width: 100%">
+			<div class="search-history-panel" style="float: left; width: 50%">
+				<h4 id="search-history-title"></h4>
+				<ul class="search-history"></ul>
+			</div>
+
+			<div class="cart-contents-panel" style="float: left; width: 50%">
+				<h4 id="cart-contents-title"></h4>
+				<ul class="cart-contents"></ul>
+			</div>
+		</div>
+		
+		<hr />
+		
+		<div>
 		  <p>
 		    <button type="button" onclick="clearLSSearchHistory()">Clear Search History</button>
+				<button type="button" onclick="clearLSCartContents()">Clear Cart Contents</button>
 		    <button type="button" onclick="clearLsVisitorId()">Clear Visitor ID</button>
 	    </p>
 		</div>
-
   <body>
 </html>
