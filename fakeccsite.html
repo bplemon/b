@@ -25,7 +25,11 @@
 			function getSearchHistory(visitorIdKey) {
 			  return localStorage.getItem('searchHistory_' + visitorIdKey);
 			}
-		
+	
+			function setVisitorIdText(text) {
+				$('#visitor-id').text(text);
+			}
+			
 		  function addSearchItem() {
 				var visitorIdKey = localStorage.visitorId, searchValue = $('#search-value').val();
 
@@ -36,7 +40,8 @@
 				  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
 					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
 					localStorage.visitId = window.OracleUnifiedVisit.visitId();
-					visitorIdKey = localStorage.visitorId;
+					visitorIdKey = localStorage.visitorId
+					setVisitorIdText(visitorIdKey);
 				}
 
 				lsSerchHistory = localStorage.getItem('searchHistory_' + visitorIdKey);
@@ -63,6 +68,7 @@
 			
 			function clearLsVisitorId() {
 			  localStorage.clear();
+				setVisitorIdText('not set');
 			}
 			
 			$(document).ready(function(){
@@ -82,7 +88,7 @@
 					$('ul.search-history').append('<li>' + item + '</li>');		
 				});
 				
-				
+				setVisitorIdText(visitorIdKey);
       });
 		</script>
   </head>
@@ -93,23 +99,33 @@
 				<img src="oracle_logo.svg">
 				<span>Fake Commerce Cloud Site</span>
 			</a>
-			<span>VisitorId: Not set</span>
+			<span style="float: right">VisitorId: <span class="strong" id="visitor-id">Not set</span></span>
 		</div>
 
-    <p>
-			<input id="search-value" type="text" placeholder="Search..."></input>
-			<button type="button" onclick="addSearchItem()">Search</button>
-		</p>
+		<div class="search-panel">
+      <p>
+			  <input id="search-value" type="text" placeholder="Search..."></input>
+			  <button type="button" onclick="addSearchItem()">Search</button>
+		  </p>
+		</div>
+		
+		<div class="tiles">
+		
+		</div>
+		
+		
 		
 		<hr />
-		<h4>Your current search history</h4>
-		<ul class="search-history"></ul>
-		<br />
-		<hr />
-		<p>
-		  <button type="button" onclick="clearLSSearchHistory()">Clear Search History</button>
-		  <button type="button" onclick="clearLsVisitorId()">Clear Visitor ID</button>
-	  </p>
+		<div class="search-history">
+		  <h4>Your current search history</h4>
+		  <ul class="search-history"></ul>
+		  <br />
+		  <hr />
+		  <p>
+		    <button type="button" onclick="clearLSSearchHistory()">Clear Search History</button>
+		    <button type="button" onclick="clearLsVisitorId()">Clear Visitor ID</button>
+	    </p>
+		</div>
 
   <body>
 </html>
