@@ -24,8 +24,9 @@
 				var visitorIdKey = localStorage.visitorId;
 
 				if(visitorIdKey == null) {
-				debugger;
-				  OracleUnifiedVisit.handle();
+				  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
+					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
+					localStorage.visitId = window.OracleUnifiedVisit.visitId();
 				}
 				
 				var textValue = $('#search-value').val(),
@@ -71,7 +72,7 @@
   
 		<hr />
 		<p><button type="button" onclick="clearLocalStorageSearchItem()">Clear Search History</button></p>
-		<p><button type="button" onclick="clearLocalStorage()">Clear Local Storage</button></p>
+		<p><button type="button" onclick="clearLocalStorage()">Clear Visitor ID</button></p>
 
   <body>
 </html>
