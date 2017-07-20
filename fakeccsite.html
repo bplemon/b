@@ -1,6 +1,11 @@
 <html>
   <head>
     <title>Fake Cloud Commerce Site</title>
+		<script type='text/javascript' src="https://cloud-commerce-visit.oracleoutsourcing.com/Visit/js/oracleunifiedvisit.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="https://ccexperimentsstatic.oracleoutsourcing.com/js/atgsvcs.js"></script>
+		<link href="style.css" rel="stylesheet" />
+		
     <script type="text/javascript">
 			window.OracleUnifiedVisit =
 			{
@@ -14,10 +19,6 @@
 				}
 			};
 		</script>
-		<script type='text/javascript' src="https://cloud-commerce-visit.oracleoutsourcing.com/Visit/js/oracleunifiedvisit.js"></script>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>
-    <script type="text/javascript" src="https://ccexperimentsstatic.oracleoutsourcing.com/js/atgsvcs.js"></script>
-		<link href="style.css" rel="stylesheet" />
 		
 		<script>
 		
@@ -26,21 +27,20 @@
 			}
 		
 		  function addSearchItem() {
-				var searchValue, visitorIdKey = localStorage.visitorId;
+				var visitorIdKey = localStorage.visitorId, searchValue = $('#search-value').val();
 
+				if(searchValue == '')
+					return;
+				
 				if(visitorIdKey == null) {
 				  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
 					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
 					localStorage.visitId = window.OracleUnifiedVisit.visitId();
 					visitorIdKey = localStorage.visitorId;
 				}
-				
-				searchValue = $('#search-value').val();
+
 				lsSerchHistory = localStorage.getItem('searchHistory_' + visitorIdKey);
 				
-				if(searchValue == '')
-					return;
-					
 				if(lsSerchHistory == null || lsSerchHistory == '') {
 					lsSerchHistory = searchValue;
 				} else {
@@ -101,7 +101,7 @@
 		</p>
 		
 		<hr />
-		<h1>Search History</h1>
+		<h4>Search History</h4>
 		<ul class="search-history"></ul>
   
 		<hr />
