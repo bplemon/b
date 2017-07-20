@@ -53,7 +53,7 @@
 					if(textValue == '')
 						return;
 						
-					if(localStorageSerchVal == '') {
+					if(localStorageSerchVal == null || localStorageSerchVal == '') {
 						localStorageSerchVal = textValue;
 					} else {
 						localStorageSerchVal = localStorageSerchVal + ',' + textValue;
@@ -61,7 +61,7 @@
 					
 					localStorage.setItem(visitorIdKey, localStorageSerchVal);	
 					
-					$('#search-value').text('');
+					$('#search-value').val('');
 				}
 			}
 			
