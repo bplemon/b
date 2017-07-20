@@ -20,7 +20,52 @@
 		<link href="style.css" rel="stylesheet" />
 		
 		<script>
-		  function setLocalStorageSearchItem() {
+		
+			function getSearchHistory(visitorIdKey) {
+			  return localStorage.getItem('searchHistory_' + visitorIdKey);
+			}
+		
+		  function addSearchItem() {
+				var searchValue, visitorIdKey = localStorage.visitorId;
+
+				if(visitorIdKey == null) {
+				  window.ATGSvcs && ATGSvcs.visitIDsLoaded();
+					localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
+					localStorage.visitId = window.OracleUnifiedVisit.visitId();
+					visitorIdKey = localStorage.visitorId;
+				}
+				
+				searchValue = $('#search-value').val();
+				lsSerchHistory = localStorage.getItem('searchHistory_' + visitorIdKey);
+				
+				if(searchValue == '')
+					return;
+					
+				if(lsSerchHistory == null || lsSerchHistory == '') {
+					lsSerchHistory = searchValue;
+				} else {
+					lsSerchHistory = lsSerchHistory + ',' + searchValue;
+				}
+				
+				localStorage.setItem('searchHistory_' + visitorIdKey, lsSerchHistory);	
+				
+				$('ul.search-history').append('<li>' + searchValue + '</li>');
+				
+				$('#search-value').val('');
+			}
+			
+			function clearLSSearchHistory() {
+			  var visitorIdKey = localStorage.visitorId;
+				if(visitorIdKey != null) {
+				  localStorage.removeItem('searchHistory_' + visitorIdKey);
+				}
+			}
+			
+			function clearLsVisitorId() {
+			  localStorage.clear();
+			}
+			
+			$(document).ready(function(){
 				var visitorIdKey = localStorage.visitorId;
 
 				if(visitorIdKey == null) {
@@ -30,33 +75,15 @@
 					visitorIdKey = localStorage.visitorId;
 				}
 				
-				var textValue = $('#search-value').val(),
-						localStorageSerchVal = localStorage.getItem(visitorIdKey);
+			  var searchHistory = getSearchHistory(visitorIdKey), items;
 				
-				if(textValue == '')
-					return;
-					
-				if(localStorageSerchVal == null || localStorageSerchVal == '') {
-					localStorageSerchVal = textValue;
-				} else {
-					localStorageSerchVal = localStorageSerchVal + ',' + textValue;
-				}
+				items = searchHistory.split(",");
+				items.forEach(function(item){
+					$('ul.search-history').append('<li>' + item + '</li>');		
+				});
 				
-				localStorage.setItem(visitorIdKey, localStorageSerchVal);	
 				
-				$('#search-value').val('');
-			}
-			
-			function clearLocalStorageSearchItem() {
-			  var visitorIdKey = localStorage.visitorId;
-				if(visitorIdKey != null) {
-				  localStorage.removeItem(visitorIdKey);
-				}
-			}
-			
-			function clearLocalStorage() {
-			  localStorage.clear();
-			}
+      });
 		</script>
   </head>
 
@@ -68,12 +95,20 @@
 			</a>
 		</div>
 
-    <p><input id="search-value" type="text" placeholder="Search..."></input></p>
-		<p><button type="button" onclick="setLocalStorageSearchItem()">Search</button></p>
+    <p>
+			<input id="search-value" type="text" placeholder="Search..."></input>
+			<button type="button" onclick="addSearchItem()">Search</button>
+		</p>
+		
+		<hr />
+		<h1>Search History</h1>
+		<ul class="search-history"></ul>
   
 		<hr />
-		<p><button type="button" onclick="clearLocalStorageSearchItem()">Clear Search History</button></p>
-		<p><button type="button" onclick="clearLocalStorage()">Clear Visitor ID</button></p>
+		<p>
+		  <button type="button" onclick="clearLSSearchHistory()">Clear Search History</button>
+		  <button type="button" onclick="clearLsVisitorId()">Clear Visitor ID</button>
+	  </p>
 
   <body>
 </html>
