@@ -30,8 +30,10 @@
 				$('#visitor-id').text(text);
 			}
 			
-			function setSearchHistoryTitle(title) {
-		    $('#search-history-title').text(title);
+			function setSearchHistoryTitle(isHistory) {
+				var hasHistoryTitle = 'Your current search history',
+					  noHistoryTitle = 'You have no search history';
+		    $('#search-history-title').text(isHistory ? hasHistoryTitle, noHistoryTitle);
 			}
 			
 		  function addSearchItem() {
@@ -61,6 +63,8 @@
 				$('ul.search-history').append('<li>' + searchValue + '</li>');
 				
 				$('#search-value').val('');
+				
+				setSearchHistoryTitle(true);	
 			}
 			
 			function clearLSSearchHistory() {
@@ -96,14 +100,12 @@
 					searchHistoryItems.forEach(function(item){
 						$('ul.search-history').append('<li>' + item + '</li>');		
 					});
-					searchHistoryTitle = 'Your current search history';
+					isSearchHistory = true;
 				} else {
-					searchHistoryTitle = 'No search history';
+					isSearchHistory = false;
 				}
 
-				setSearchHistoryTitle(searchHistoryTitle);	
-
-				
+				setSearchHistoryTitle(isSearchHistory);	
       });
 		</script>
   </head>
