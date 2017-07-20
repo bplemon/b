@@ -72,7 +72,8 @@
 				if(visitorIdKey != null) {
 				  localStorage.removeItem('searchHistory_' + visitorIdKey);
 				}
-				setSearchHistoryTitle('No search history');	
+				setSearchHistoryTitle(false);
+				$('ul.search-history').empty();;
 			}
 			
 			function clearLsVisitorId() {
