@@ -32,6 +32,6 @@ p, h1, h4 {
   text-align: center; 
 }
 ul.search-history, ul.cart-contents {
-  width: 10%;
+  width: 20%;
   margin: auto;
 }
