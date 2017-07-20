@@ -33,7 +33,8 @@
 			function setSearchHistoryTitle(isHistory) {
 				var hasHistoryTitle = 'Your current search history',
 					  noHistoryTitle = 'You have no search history';
-		    $('#search-history-title').text(isHistory ? hasHistoryTitle, noHistoryTitle);
+						
+		    $('#search-history-title').text(isHistory ? hasHistoryTitle : noHistoryTitle);
 			}
 			
 		  function addSearchItem() {
