@@ -51,6 +51,17 @@
 			
 			function clearLocalStorage() {
 			  localStorage.clear();
+				window.OracleUnifiedVisit =
+				{
+					accountId: '0000000000001',
+					host: 'https://cloud-commerce-visit.oracleoutsourcing.com',
+					handle: function()
+					{
+						window.ATGSvcs && ATGSvcs.visitIDsLoaded();
+						localStorage.visitorId = window.OracleUnifiedVisit.visitorId();
+						localStorage.visitId = window.OracleUnifiedVisit.visitId();
+					}
+				};
 			}
 		</script>
   </head>
