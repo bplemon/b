@@ -5,13 +5,16 @@
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.js"></script>		
 		<script>
       $(document).ready(function(){
-        var visitorIdKey, searchHistory = 'N/A';
+        var visitorIdKey, searchHistory = 'N/A', items = '';
 				
         if(localStorage && localStorage.visitorId) {
 				  visitorIdKey = localStorage.visitorId;
-					searchHistory = localStorage.getItem(visitorIdKey);
+					searchHistory = localStorage.getItem('searchHistory_' + visitorIdKey);
 			    $('#visitor-id').text(visitorIdKey);
-				  $('#visitor-search').text(searchHistory == null ? 'N/A' : searchHistory);
+					items = searchHistory.split(",");
+					items.forEach(function(item){
+						$('ul.search-history').append('<li>' + item + '</li>');		
+					});
 				}
 				
       });
@@ -30,7 +33,8 @@
 
     <p>You have been taken to this page by clicking a Physical Web link.</p>
     <p>Your visitorId is: <span id="visitor-id" class="strong">N/A</span></p>
-		<p>You have previously searched for: <span id="visitor-search" class="strong">N/A</span></p>
+		<p>You have previously searched for:</p>
+		<ul class="search-history"></ul>
 
   <body>
 </html>
