@@ -22,7 +22,7 @@ a.brand {
   vertical-align: middle;
   text-decoration: none;
 }
-p { 
+p, h1, h4 { 
   text-align: center; 
 }
 ul.search-history {
